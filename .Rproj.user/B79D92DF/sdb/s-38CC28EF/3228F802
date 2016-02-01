@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1454304257452.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3228F802",
+    "lastKnownWriteTime" : 111550524582252,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "q1jy7not7f",
+        "caption" : "tidy_set",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=tidy_set&cache_key=q1jy7not7f",
+        "displayedObservations" : "180",
+        "environment" : "",
+        "object" : "tidy_set",
+        "totalObservations" : "180",
+        "variables" : "81"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,25 @@
+{
+    "contents" : "",
+    "created" : 1454304268333.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B4384A06",
+    "lastKnownWriteTime" : 5168212480,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "pkfmkp2rmd",
+        "caption" : "combined_set",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=combined_set&cache_key=pkfmkp2rmd",
+        "displayedObservations" : 10299,
+        "environment" : "",
+        "object" : "combined_set",
+        "totalObservations" : 10299,
+        "variables" : 81
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

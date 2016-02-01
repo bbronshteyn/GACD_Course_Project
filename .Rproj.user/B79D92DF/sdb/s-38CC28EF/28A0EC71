@@ -1,0 +1,18 @@
+{
+    "contents" : "# Step 1 - Download file and unzip\nif(!file.exists(\"./data\")) {dir.create(\"./data\")}\nfileUrl <- \"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip\"\ndownload.file(fileUrl,destfile = \"./data/UCI_HAR_Dataset.zip\",method = \"curl\")\nunzip(\"./data/UCI_HAR_Dataset.zip\", exdir = \"./data/\")\n\n#Step 2 - Read in files\nfeatures <- read.table(\"./data/UCI HAR Dataset/features.txt\")\nactivity_labels <- read.table(\"./data/UCI HAR Dataset/activity_labels.txt\")\nsubject_train <- read.table(\"./data/UCI HAR Dataset/train/subject_train.txt\")\nsubject_test  <- read.table(\"./data/UCI HAR Dataset/test/subject_test.txt\") \nX_test <- read.table(\"./data/UCI HAR Dataset/test/X_test.txt\") \ny_test <- read.table(\"./data/UCI HAR Dataset/test/y_test.txt\") \nX_train <- read.table(\"./data/UCI HAR Dataset/train/X_train.txt\") \ny_train <- read.table(\"./data/UCI HAR Dataset/train/y_train.txt\") \n\n#Step 3 - Merge datasets\nlibrary(dplyr)\n## combine two X data sets into one row-wise\ncombined_X <- rbind(X_test, X_train)\n## use feature names from feature file to set names for combined set\nfeature_names <- as.character(features[[2]])\nnames(combined_X) <- feature_names\n## extract all columns that have mean or std in the name\nmean_and_std_cols <- grepl(\"mean|std\", names(combined_X))\ncombined_X_shrunk <- combined_X[ , mean_and_std_cols]\n## combine two Y data sets into one row-wise\ncombined_Y <- rbind(y_test, y_train)\n## add proper name\nnames(combined_Y) <- c(\"activity_id\")\n## combine subject sets row-wise\ncombined_subj <- rbind(subject_test,subject_train)\n## add proper name\nnames(combined_subj) <- c(\"subject_id\")\n## combine subject, activity, and data sets\ncombined_set <- cbind(combined_subj,combined_Y,combined_X_shrunk)\n## replace activity ids with values\ncombined_set <- merge(activity_labels, combined_set, by.x = \"V1\", by.y = \"activity_id\")\ncombined_set <- rename(combined_set, activity = V2)\ncombined_set <- combined_set %>% select(-V1) %>% arrange(subject_id, activity)\n\n#Step 4 - Create independent tidy data set with means\n## group by activity and then subject_id (per instructions) and summarize each column using mean\ntidy_set <- combined_set %>% group_by(activity, subject_id) %>% summarize_each(funs(mean))\n## change column names to add MEAN\nnames(tidy_set)[3:81] <- paste(\"MEAN_\",names(tidy_set)[3:81],sep = \"\")\n\n#Step 5 - Write out the tidy data set\nwrite.table(tidy_set, file = \"./data/tidy_set.txt\", row.name=FALSE)\n",
+    "created" : 1454294678664.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "929987213",
+    "id" : "28A0EC71",
+    "lastKnownWriteTime" : 1454304503,
+    "path" : "~/Dev/Learning/Coursera/Getting_and_Cleaning_data/Course Project/run_analysis.R",
+    "project_path" : "run_analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
